@@ -1,0 +1,38 @@
+.test {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+.t-col {
+  flex-basis: 44%;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  text-align: left;
+  background-color: #eaffe6;
+  padding: 25px;
+  cursor: pointer;
+  display: flex;
+}
+.t-col img {
+  height: 40px;
+  margin: 0 30px 0 5px;
+  border-radius: 50%;
+}
+.t-col p {
+  padding: 0;
+}
+.t-col h3 {
+  margin-top: 15px;
+  text-align: left;
+}
+.t-col .fa {
+  color: #45a247;
+}
+@media (max-width: 700px) {
+  .t-col img {
+    /* height: 40px; */
+    margin: 0 15 0px 0 0px;
+    /* border-radius: 50%; */
+  }
+}

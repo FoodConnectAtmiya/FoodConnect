@@ -1,0 +1,24 @@
+/* facilities  */
+.facilities {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+}
+.f-col {
+  flex-basis: 31%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.f-col img {
+  width: 100%;
+  border-radius: 10px;
+}
+.f-col p {
+  padding: 0;
+}
+.f-col h3 {
+  margin: 16px 0 15px 0;
+  text-align: left;
+}
