@@ -7,7 +7,7 @@ const videoConstraints = {
   height: 720,
   facingMode: "user"
 };
-function CaputurePhoto({setImgData}) {
+function CaputurePhoto() {
     const [img,setImg]=useState(null);
   const webcamRef = React.useRef(null);
   const [isStop,setIsStop]=useState(true);
@@ -22,7 +22,8 @@ function CaputurePhoto({setImgData}) {
 
   return (
     <div id="capture-area">
-      { isStop && <>
+      <h1>Take Photo And Approach</h1>
+      { isStop ? <>
         <Webcam
           mirrored={true}
           audio={false}
@@ -33,8 +34,10 @@ function CaputurePhoto({setImgData}) {
           videoConstraints={videoConstraints}
         />
         <button style={{zIndex:5}} onClick={capture}>Capture photo</button>
-      </>}
-      {img && <img style={{width:'50dvw'}} src={img} />}
+      </>: <div>
+        {img && <img style={{width:'50dvw'}} src={img} />}
+        <button>Add Photo</button>
+      </div> }
     </div>
   );
 }

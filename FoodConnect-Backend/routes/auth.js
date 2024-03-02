@@ -166,5 +166,17 @@ router.get('/feedback/:did', async (req, res) => {
   }
 });
 
+router.post("/leaderBoard",async (req,res)=>{
+    try {
+        const pipeline = [
+        { $group: { _id: "$donor_Id", avg: { $avg: "$rating" } } },
+        { $sort: { total: -1} }, 
+    ];
+        const dt = await Feedback.aggregate(pipeline);
+        res.status(200).json(dt);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
 
 module.exports=router;
