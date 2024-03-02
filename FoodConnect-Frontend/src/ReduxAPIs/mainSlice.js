@@ -13,6 +13,7 @@ export const addOrganizationAsync =  createAsyncThunk(
 export const loginOrganizationAsync = createAsyncThunk(
     '/loginOrganization',
     async (organization) =>{
+        console.log(organization)
         const response = await loginOrganization(organization);
         return response.data;
     }
@@ -105,6 +106,7 @@ export const mainSlice = createSlice({
         }  )
         .addCase(loginOrganizationAsync.fulfilled, (state, action) =>{
             state.loggedInOrganization = action.payload;
+            localStorage.setItem("loggedInOrganization",JSON.stringify(state.loggedInOrganization));
             state.status = 'idle';
         })
         .addCase(loginOrganizationAsync.rejected, (state, action) =>{
@@ -148,6 +150,7 @@ export const mainSlice = createSlice({
         })
         .addCase(loginDonorAsync.fulfilled, (state, action) =>{
             state.loggedInDonor = action.payload;
+            localStorage.setItem("loggedInDonor",JSON.stringify(state.loggedInDonor));
             state.status = 'idle';
         })
         .addCase(getDonorAcceptanceAsync.pending, (state) =>{

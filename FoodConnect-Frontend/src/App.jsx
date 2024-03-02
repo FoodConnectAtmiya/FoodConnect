@@ -20,7 +20,7 @@ function App() {
   const [storeSignUpData, setStoreSignUpData] = useState("");
   
   return (
-      <MyContext.Provider value={{ storeSignUpData, setStoreSignUpData }}>
+    <MyContext.Provider value={{ storeSignUpData, setStoreSignUpData }}>
     <div className="app">
         <BrowserRouter>
           <Routes>

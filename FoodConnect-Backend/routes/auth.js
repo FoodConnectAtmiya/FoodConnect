@@ -14,8 +14,8 @@ const notifyall = async (dt)=>{
 }   
 router.post("/addOrganization",async (req,res)=>{
    try {
-        const {email,phone,password,address,acceptance_status,name,city,pinCode,min_serveble,max_distance}=req.body;
-        await organization.create({name,pinCode,email,phone,password,address,acceptance_status,city,min_serveble,max_distance});
+        const {email,phoneNumber,password,address,name,city,pinCode}=req.body;
+        await organization.create({email,phone: phoneNumber,password,address,name,city,pinCode});
         res.sendStatus(200);
    } catch (error) {
         res.status(404).json({status:'error',error});
@@ -82,8 +82,9 @@ router.get("/nearbyDonors/:pinCode",async (req,res)=>{
 // DONOR SERVICES
 router.post("/addDonor",async (req,res)=>{
     try {
-        const {email,phone,password,name,city,address,pinCode} = req.body;
-        await FoodDonor.create({email,phone,password,name,city,address,pinCode});
+        const {email,phoneNumber,password,name,city,address,pinCode} = req.body;
+        console.log(req.body)
+        await FoodDonor.create({email,phone: phoneNumber,password,name,city,address,pinCode});
         res.sendStatus(200);
     } catch (error) {
         res.status(404).json({status:'error',error});

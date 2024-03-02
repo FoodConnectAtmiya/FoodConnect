@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./../index.css";
-function SignUp() {
+import { useDispatch } from "react-redux";
+import { loginOrganizationAsync } from "../ReduxAPIs/mainSlice";
+function SignIn() {
   const nav = useNavigate();
-
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const dispatch  = useDispatch();
   const {
     register,
     handleSubmit,
@@ -16,7 +15,8 @@ function SignUp() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    dispatch(loginOrganizationAsync(data));
   };
 
   return (
@@ -50,7 +50,7 @@ function SignUp() {
                   {/* {errors} */}
                   {errors.email && <p>{errors.email.message}</p>}
                 </div>
-                <div className="input-field">
+                {/* <div className="input-field">
                   <input
                     placeholder="Phone Number"
                     className="validate"
@@ -65,7 +65,7 @@ function SignUp() {
                     })}
                   />
                   {errors.phoneNumber && <p>Invalid Phone Number</p>}
-                </div>
+                </div> */}
                 <div className="input-field">
                   <input
                     placeholder="Password"
@@ -94,4 +94,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;

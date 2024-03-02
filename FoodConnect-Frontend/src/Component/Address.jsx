@@ -3,15 +3,15 @@ import {useForm} from 'react-hook-form'
 import {useDispatch, useSelector} from 'react-redux';
 import { selectSignUpData } from '../ReduxAPIs/mainSlice';
 import {addOrganizationAsync} from '../ReduxAPIs/mainSlice';
-import { MyContext } from '../App';
+
 import '../index.css';
 
 const Address = () => {
     const dispatch = useDispatch();
     // storeSignUpData, setStoreSignUpData
    
-    const {storeSignUpData, setStoreSignUpData}= useContext(MyContext);
-    console.log(storeSignUpData);
+    
+    // console.log(storeSignUpData);
     const {
         register,
         handleSubmit,
@@ -20,7 +20,7 @@ const Address = () => {
       } = useForm()
       const data = useSelector(selectSignUpData);
       const onSubmit = (formData) =>{
-        const finalData = {...storeSignUpData,formData};
+        const finalData = {formData};
     
         dispatch(addOrganizationAsync(finalData));
       } 
