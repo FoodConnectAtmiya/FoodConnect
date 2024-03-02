@@ -1,28 +1,20 @@
-import {React, useContext} from 'react'
+import React from 'react'
 import {useForm} from 'react-hook-form'
-import {useDispatch, useSelector} from 'react-redux';
-import { selectSignUpData } from '../ReduxAPIs/mainSlice';
-import {addOrganizationAsync} from '../ReduxAPIs/mainSlice';
-import { MyContext } from '../App';
-import '../index.css';
-
-const Address = () => {
+import '../index.css'
+import { useDispatch } from 'react-redux';
+import {addDonorAsync} from '../ReduxAPIs/mainSlice'
+const Address = ({data}) => {
     const dispatch = useDispatch();
-    // storeSignUpData, setStoreSignUpData
-   
-    const {storeSignUpData, setStoreSignUpData}= useContext(MyContext);
-    console.log(storeSignUpData);
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
       } = useForm()
-      const data = useSelector(selectSignUpData);
       const onSubmit = (formData) =>{
-        const finalData = {...storeSignUpData,formData};
-    
-        dispatch(addOrganizationAsync(finalData));
+        const finalData = {...data,formData};
+        console.log(finalData);
+        dispatch(addDonorAsync(finalData));
       } 
     return (
         <>
@@ -37,7 +29,7 @@ const Address = () => {
                                 <div className="wrapper">
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className='mb-2'>
-                                            <label htmlFor="name">Name Of Organization:</label><br />
+                                            <label htmlFor="name">Name Of Donor:</label><br />
                                             <input required type="text" id="name" name="name" autoComplete="name" enterKeyHint="next" {...register("name")}/>
                                         </div>
                                         <div className='mb-2'>

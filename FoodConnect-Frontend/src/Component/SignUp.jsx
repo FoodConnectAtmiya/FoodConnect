@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { auth } from "./config";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import {React, useState } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import {useForm} from 'react-hook-form'
+import {useDispatch} from "react-redux";
+// import {storeSignUpDataToRedux} from "../ReduxAPIs/mainSlice";
+import {useContext} from "react";
+import {MyContext} from "../App";
+// import {useHistory} from "react-router-dom";
 import "./../index.css";
+
+
 function SignUp() {
   const nav = useNavigate();
+  const dispatch = useDispatch();
+  const {storeSignUpData,setStoreSignUpData}=useContext(MyContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  // const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -18,11 +22,24 @@ function SignUp() {
     formState: { errors },
   } = useForm()
   const onSubmit = (data) =>{
-    console.log(data)
+    // console.log(data.role);
+   
+    if(data.role == "organization"){
+      console.log("jdkjfakld");
+      setStoreSignUpData(data);
+      console.log(storeSignUpData)
+      nav("/get-address");
+    }
+    else{
+      console.log("12345");
+      nav("/get-address-donor");
+    }
+    console.log("777")
   } 
-
+  
   return (
     <>
+      {/* {errors && console.log(errors)} */}
       <section className="pop-sec">
         <div className="content pop">
           <div>
@@ -30,7 +47,7 @@ function SignUp() {
               <h1>
                 Sign <span className="red">Up</span> 
               </h1>
-              <form action="" onSubmit={handleSubmit(onSubmit)}>
+              <form  onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field"> 
               <select name="role" id="role" className="mb-2" {...register("role")}>
                 <option value="organization" >Organization</option>
@@ -67,10 +84,12 @@ function SignUp() {
                   {...register("password", {required: true})}
                 />
               </div>
-              <div className="btn btn-g">
+              <button className="btn btn-g" type="submit">
                 Sign Up 
+              </button>
+              <div className="text-white" id="already">Already have an account? 
+              <Link to="/login" ><p className="underline">Login</p></Link>
               </div>
-              <p className="text-white">Already have an account? <Link to="/login" ><p className="underline">Login</p></Link></p>
               </form>
             </div>
           </div>

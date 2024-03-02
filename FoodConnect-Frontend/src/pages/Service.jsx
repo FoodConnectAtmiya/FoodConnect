@@ -8,7 +8,7 @@ const Service = () => {
         <p> To be very helpfull for the NGOs and other Authorities</p>
         <div className="row">
           <div className="course-col">
-            <h3>Collecting Food</h3>
+            <h3>Collecting Food</h3> 
             <p>
               When anyone fills up the form to donate the food, we contact them
               and collect the food from them to deliver it to the needy poeple.
@@ -29,11 +29,6 @@ const Service = () => {
             </p>
           </div>
         </div>
-        <center>
-          <a href="/list">
-            <div className="btn red-btn">LIST</div>
-          </a>
-        </center>
       </section>
     </>
   );

@@ -8,13 +8,13 @@ const Review = () => {
     <>
       <section className="test" id="review">
         <h1>What Our Clients Says</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <p>Trusted by happy clients.</p>
         <div className="row">
           <div className="t-col">
             <img src={user2} alt="" />
             <div>
               <p>
-                The team is well organised and arrived within 1 hour of making
+                The team is well organised and arrived within 1 hour of making 
                 the call about donation. They administered the food , came in
                 their own vehicle n gathered food in own utensils ..hasslefree
                 food pick up.. definitely would suggest for others to use this

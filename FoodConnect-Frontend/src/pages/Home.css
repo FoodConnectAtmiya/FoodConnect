@@ -19,6 +19,7 @@ section {
   min-width: 100%;
   max-height: 120vh;
   z-index: -10000;
+  object-fit: cover;
 }
 .container {
   width: 100%;

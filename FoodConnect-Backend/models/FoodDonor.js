@@ -16,8 +16,8 @@ const donorSchema = new Schema({
         type: Buffer,
         required: true
     },
-    addresses:{
-        type: [Schema.Types.Mixed],
+    address:{
+        type: String,
     },
     name:{
         type: String,

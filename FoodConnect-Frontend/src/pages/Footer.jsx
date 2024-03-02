@@ -25,7 +25,7 @@ const Footer = () => {
         <p>
           Made with
           <i className="fa fa-heart-o">_</i>
-          by quadHackers
+          by foodFill
         </p>
       </section>
     </>

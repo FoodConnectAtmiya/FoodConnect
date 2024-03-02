@@ -77,7 +77,7 @@ const About = () => {
               </ul>
             </div>
 
-            <a href="/register">
+            <a href="/Signup">
               <div className="btn red-btn">Join Us Now</div>
             </a>
           </div>
