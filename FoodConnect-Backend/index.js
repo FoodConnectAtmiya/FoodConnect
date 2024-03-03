@@ -5,8 +5,8 @@ const auth = require("./routes/auth");
 const app = express();
 const mongoose = require('mongoose');
 
-// const mongourl = "mongodb+srv://milangohel07:hiLgT18Uxa12f8Ph@cluster0.2vpd6qb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-const mongourl = "mongodb://0.0.0.0:27017/foodconnect"
+const mongourl = "mongodb+srv://milangohel07:hiLgT18Uxa12f8Ph@cluster0.2vpd6qb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const mongourl = "mongodb://0.0.0.0:27017/foodconnect"
 mongoose.connect(mongourl,{}).then(()=>{
     console.log("connected mongourl successfully");
 }).catch((err)=>{console.log(err)})
