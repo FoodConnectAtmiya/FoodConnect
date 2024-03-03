@@ -7,6 +7,7 @@ const videoConstraints = {
   height: 720,
   facingMode: "user"
 };
+<<<<<<< HEAD
 function dataURItoBlob(dataURI) {
   const byteString = atob(dataURI.split(',')[1]);
   const mimeType = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -19,6 +20,9 @@ function dataURItoBlob(dataURI) {
   return blob;
 }
 function CaputurePhoto({setImgData}) {
+=======
+function CaputurePhoto() {
+>>>>>>> dcb2b02d1f0e009b00650ca3f345927d6e45473b
     const [img,setImg]=useState(null);
   const webcamRef = React.useRef(null);
   const [isStop,setIsStop]=useState(true);
@@ -39,7 +43,8 @@ function CaputurePhoto({setImgData}) {
 
   return (
     <div id="capture-area">
-      { isStop && <>
+      <h1>Take Photo And Approach</h1>
+      { isStop ? <>
         <Webcam
           mirrored={true}
           audio={false}
@@ -50,8 +55,10 @@ function CaputurePhoto({setImgData}) {
           videoConstraints={videoConstraints}
         />
         <button style={{zIndex:5}} onClick={capture}>Capture photo</button>
-      </>}
-      {img && <img style={{width:'50dvw'}} src={img} />}
+      </>: <div>
+        {img && <img style={{width:'50dvw'}} src={img} />}
+        <button>Add Photo</button>
+      </div> }
     </div>
   );
 }

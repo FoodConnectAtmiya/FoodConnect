@@ -181,6 +181,7 @@ router.get('/feedback/:did', async (req, res) => {
 })
 let a = 1;
 
+<<<<<<< HEAD
 const storage=multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null,'./images')
@@ -196,5 +197,19 @@ const storage=multer.diskStorage({
     console.log(req.file.path);
     res.send('File uploaded successfully');
   });
+=======
+router.post("/leaderBoard",async (req,res)=>{
+    try {
+        const pipeline = [
+        { $group: { _id: "$donor_Id", avg: { $avg: "$rating" } } },
+        { $sort: { total: -1} }, 
+    ];
+        const dt = await Feedback.aggregate(pipeline);
+        res.status(200).json(dt);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
+>>>>>>> dcb2b02d1f0e009b00650ca3f345927d6e45473b
 
 module.exports=router;

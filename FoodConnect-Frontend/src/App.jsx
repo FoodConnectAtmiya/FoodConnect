@@ -13,6 +13,7 @@ import SignIn from './Component/SignIn'
 import CaputurePhoto from "./Component/CaputurePhoto";
 import AddressDonor from "./Component/AddressDonor";
 import  { useState, createContext } from "react"
+import Dashboard from './Dashboard'
 
 export const MyContext = createContext();
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <MyContext.Provider value={{ storeSignUpData, setStoreSignUpData }}>
     <div className="app">
+      {/* <Dashboard/> */}
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -39,7 +41,7 @@ function App() {
           </Routes>
         </BrowserRouter>
     </div>
-      </MyContext.Provider>
+    </MyContext.Provider>
   );
 }
 
