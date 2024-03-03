@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import {addOrganization, loginOrganization ,addAvailability, getNotification, acceptRequest, nearbyDonors, addDonor, loginDonor, getDonorAcceptance, storeSignUpData} from './mainAPI';
+import {addOrganization, loginOrganization ,addAvailability, getNotification, acceptRequest, nearbyDonors, addDonor, loginDonor, getDonorAcceptance, storeSignUpData, nearbyOrganization} from './mainAPI';
 
 
 export const addOrganizationAsync =  createAsyncThunk(
@@ -49,10 +49,18 @@ export const nearbyDonorsAsync = createAsyncThunk(
         return response.data;
     }
 )
+export const nearbyOrganizationAsync = createAsyncThunk( 
+    '/nearbyOrganization',
+    async(pinCode) =>{
+        const response = await nearbyOrganization(pinCode);
+        return response.data;
+    }
+)
 
 export const addDonorAsync = createAsyncThunk(
     '/addDonor',
     async(donor) =>{
+        console.log(donor + "from mainSlice addDonorAsync");
         const response = await addDonor(donor);
         return response.data;
     }
@@ -84,6 +92,7 @@ export const mainSlice = createSlice({
         loggedInDonor: null,
         nearbyDonorsData: null,
         signUpData: null,
+        nearBy: null,
     },
     reducers:{
         storeSignUpDataToRedux: (state,data) =>{
@@ -136,7 +145,7 @@ export const mainSlice = createSlice({
             state.status = 'loading';
         })
         .addCase(nearbyDonorsAsync.fulfilled, (state, action) =>{
-            
+            state.nearBy = action.payload;
             state.status = 'idle';
         })  
         .addCase(addDonorAsync.pending, (state) =>{
@@ -158,7 +167,14 @@ export const mainSlice = createSlice({
         })
         .addCase(getDonorAcceptanceAsync.fulfilled, (state, action) =>{
             state.status = 'idle';
-        })   
+        })
+        .addCase(nearbyOrganizationAsync.pending,(state) =>{
+            state.status = 'loading';
+        })
+        .addCase(nearbyOrganizationAsync.fulfilled,(state,action) =>{
+            state.nearBy = action.payload;
+            state.status = 'idle';
+        })
         
     }
 })
@@ -169,4 +185,5 @@ export const selectLoggedInDonor = (state) => state.main.loggedInDonor;
 export const selectnearbyDonorsData = (state) => state.main.nearbyDonorsData;
 export const selectNotificationData = (state) => state.main.notificationData;
 export const selectSignUpData = (state) => state.main.storeSignUpData;
+export const selectNearBy = (state) => state.main.nearBy;
 export default mainSlice.reducer;

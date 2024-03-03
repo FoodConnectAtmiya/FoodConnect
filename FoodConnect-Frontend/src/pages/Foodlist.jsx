@@ -2,13 +2,31 @@ import React, { useState, useEffect } from "react";
 import "./Foodlist.css";
 import "./Registration.css";
 import axios from "axios";
+
+
 import logo from "../assets/imgs/logo-f1.png";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { nearbyDonorsAsync, nearbyOrganizationAsync, selectNearBy } from "../ReduxAPIs/mainSlice";
 const Foodlist = () => {
-  const [data, setdata] = useState([]);
-  const nav = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() =>{
+    if(localStorage.getItem("loggedInOrganization")){
+      const pinCode = 360007;
+      // const data = (localStorage.getItem("loggedInOrganization"));
+      dispatch(nearbyDonorsAsync(pinCode));
+    }
+    else{
+      
+      dispatch(nearbyOrganizationAsync(data.dt.pinCode))
+    }
+    
+  },[])
 
+  
+  const [data, setdata] = useState(null);
+  const nav = useNavigate();
+  // const nearBy = useSelector(selectNearBy);
   const deleteitem = async (id) => {
     await axios.delete(`https://foodfill.onrender.com/api/${id}`).then((res) => {
       const dat = res.data;
@@ -33,7 +51,11 @@ const Foodlist = () => {
         console.log(error);
       });
   };
-
+  const nearBy = useSelector(selectNearBy);
+  useEffect(()=>{
+    // console.log(nearBy);
+    setdata(nearBy);  
+  },[nearBy])
   return (
     <>
       <section className="sub-header">
@@ -53,7 +75,7 @@ const Foodlist = () => {
         <h1>List Of Helping Hands Around The Nation</h1>
       </section>
 
-      <section className="contact-us">
+      {localStorage.getItem("loggedInOrganization") &&<section className="contact-us">
         <br />
         <br />
         <center>
@@ -63,9 +85,9 @@ const Foodlist = () => {
             <br />
           </h1>
         </center>
-        <button onClick={update}>see the list</button>
+        {/* <button onClick={update}>see the list</button> */}
 
-        {data.map((dat, id) => {
+        {data && data.map((dat, id) => {
           return (
             <div className="row connn">
               <div className="col">
@@ -76,27 +98,29 @@ const Foodlist = () => {
                     </center>
                   </div>
                   <div className="info">
-                    <h1>name:-{dat.name}</h1>
+                    <h1 className="text-center">{dat.name}</h1>
                     <h3 className="email">email:-{dat.email}</h3>
-                    <h3>mobile:-{dat.no}</h3>
-                    <h3>category:-{dat.category}</h3>
+                    <h3>mobile:-{dat.phone}</h3>
+                    <h3>Address : {dat.address}</h3>
+                    <h3>pinCode: {dat.pinCode}</h3>
+                    {/* <h3>category:-{dat.category}</h3> */}
 
-                    <h3 className="des">desc:-{dat.desc}</h3>
-                    <button
+                    {/* <h3 className="des">desc:-{dat.desc}</h3> */}
+                    {/* <button
                       onClick={() => {
                         deleteitem(dat._id);
                       }}
                     >
                       delete item
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
             </div>
           );
         })}
-      </section>
-      <section className="contact-us receiver">
+      </section>}
+      {localStorage.getItem("loggedInDonor") &&<section className="contact-us receiver">
         <br />
         <br />
         <center>
@@ -105,9 +129,19 @@ const Foodlist = () => {
             <br />
             <br />
             <button onClick={() => nav("/")}>go back</button>
+            {data && data.map((p)=>{
+              return <div style={{border:'2px solid red',padding:"10px"}}>
+                <p>Name: {p.name}</p>
+                <p>Address: {p.address}</p>
+                <p>City: {p.city}</p>
+                <p>pinCode: {p.pinCode}</p>
+                <p>phone: {p.phone}</p>
+                <button>Send Message</button>
+              </div>
+            })}
           </h1>
         </center>
-      </section>
+      </section>}
     </>
   );
 };

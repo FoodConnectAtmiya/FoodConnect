@@ -766,3 +766,24 @@ body {
   font-size: 14px !important;
   font-weight: 300;
 } 
+
+.mb-2 label, .input-field label, #demo{
+  font-size: 16px;
+  color: grey;
+  text-transform: lowercase;
+}
+
+.flex{
+  display: flex;
+  /* flex-direction: row; */
+  gap: 16px;
+}
+
+.full-width{
+  width: 100%;
+  /* border: 2px solid red; */
+}
+
+.full-width .full-content{
+  width: 100% !important;
+}

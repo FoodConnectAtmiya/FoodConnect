@@ -4,7 +4,9 @@ const organization = require('../models/Organization');
 const Availability = require('../models/Availablity');
 const FoodDonor = require('../models/FoodDonor');
 const Feedback = require('../models/Feedback');
-
+const Organization = require('../models/Organization');
+const multer = require('multer');
+const path = require('path')
 
 router.get("/auth",(req,res)=>{
    res.send("hi");
@@ -78,6 +80,18 @@ router.get("/nearbyDonors/:pinCode",async (req,res)=>{
         res.status(404).json({status:'error',error});
     }
 })
+router.get("/nearbyOrganization/:pincode",async (req,res)=>{
+    try {
+        const {pinCode}=req.params;
+        let pincode= pinCode % 10 ;
+        pincode = pinCode - pincode;
+        let pincode2 = pincode+9;
+        const dt = await Organization.find({pinCode: { $gte: pincode, $lte: pincode2 }});
+        res.status(200).json(dt);
+    } catch (error) {
+        res.status(404).json({status:'error',error});
+    }
+})
 
 // DONOR SERVICES
 router.post("/addDonor",async (req,res)=>{
@@ -90,7 +104,7 @@ router.post("/addDonor",async (req,res)=>{
         res.status(404).json({status:'error',error});
     }
 })
-router.get("/loginDonor",async (req,res)=>{
+router.post("/loginDonor",async (req,res)=>{
     try {
         const { email, password }=req.body;
         const dt = await FoodDonor.findOne({email,password}).select("-password");
@@ -164,7 +178,23 @@ router.get('/feedback/:did', async (req, res) => {
     console.error('Error fetching feedback:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-});
+})
+let a = 1;
 
+const storage=multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null,'./images')
+    },
+    filename: function(req,file,cb){
+        cb(null,Date.now());
+    }
+    
+})
+  const upload = multer({ storage: storage });
+
+  router.post('/upload', upload.single('screenshot'), async (req, res) => {
+    console.log(req.file.path);
+    res.send('File uploaded successfully');
+  });
 
 module.exports=router;

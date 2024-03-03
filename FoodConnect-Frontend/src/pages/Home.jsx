@@ -10,9 +10,12 @@ import Footer from "./Footer";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Component/Navbar";
+
 const Home = () => {
+  
   return (
     <>
+      <></>
       <section className="header" id="home">
         <video autoPlay muted loop id="myVideo">
           <source src={vid} type="video/mp4" />
@@ -24,7 +27,12 @@ const Home = () => {
           <p className="txt-q" id="txt-q">
             A step towards hunger elimination.
           </p>
-          <a className="btn">Visit us to know more</a>
+          {/* <a className="btn">Visit us to know more</a> */}
+          <Link to="/list" className="btn">
+          {localStorage.getItem("loggedInDonor") ? 
+           "Show All Organizations" : "Show All Donors"
+            }
+            </Link>
         </div>
       </section>
 

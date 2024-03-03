@@ -25,14 +25,10 @@ function SignUp() {
     // console.log(data.role);
 
     if (data.role == "organization") {
-
       dispatch(addOrganizationAsync(data));
-      // nav("/get-address");
     }
     else {
       dispatch(addDonorAsync(data));
-
-      // nav("/get-address-donor");
     }
     console.log("777")
   }
@@ -48,65 +44,84 @@ function SignUp() {
                 Sign <span className="red">Up</span>
               </h1>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="input-field">
-                  <select name="role" id="role" className="mb-2" {...register("role")}>
+                <div className="input-field full-width">
+                  <select name="role" id="role" className="mb-2 full-content" {...register("role")}>
                     <option value="organization" >Organization</option>
                     <option value="donor">Food Donor</option>
                   </select>
                 </div>
-                <div className="input-field">
-                  <input
-                    placeholder="Email"
-                    className="validate"
-                    // onChange={(e) => setEmail(e.target.value)}
-                    // value={email}
-                    {...register("email", { required: true, pattern: { value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi, message: "Invalid Email Adress" } })}
-                  />
-                  {errors.email && <p role="alert">{errors.email.message}</p>}
+                <div className="flex">
+
+                  <div className="input-field">
+                    <label htmlFor="city">Email</label><br />
+                    <input
+                      placeholder="Email"
+                      className="validate"
+                      // onChange={(e) => setEmail(e.target.value)}
+                      // value={email}
+                      {...register("email", { required: true, pattern: { value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi, message: "Invalid Email Adress" } })}
+                    />
+                    {errors.email && <p role="alert">{errors.email.message}</p>}
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="city">Phone Number</label><br />
+                    <input
+                      placeholder="Phone Number"
+                      className="validate"
+                      // onChange={(e) => setPhoneNumber(e.target.value)}
+                      // value={phoneNumber}
+                      {...register("phoneNumber", { required: true, pattern: { value: /\b^[789]\d{9}$\b/gi, message: "invalid phone number" } })}
+                    />
+                    {errors.phoneNumber && <p>Invalid Phone Number</p>}
+                  </div>
                 </div>
-                <div className="input-field">
-                  <input
-                    placeholder="Phone Number"
-                    className="validate"
-                    // onChange={(e) => setPhoneNumber(e.target.value)}
-                    // value={phoneNumber}
-                    {...register("phoneNumber", { required: true, pattern: { value: /\b^[789]\d{9}$\b/gi, message: "invalid phone number" } })}
-                  />
-                  {errors.phoneNumber && <p>Invalid Phone Number</p>}
+                <div className="full-width">
+                  <div className="input-field full-content">
+                    <label htmlFor="city" >password</label><br />
+                    <input
+                      placeholder="Password"
+                      className="validate full-content"
+                      type="password"
+                      // onChange={(e) => setPassword(e.target.value)}
+                      // value={password}
+                      {...register("password", { required: true })}
+                    />
+                  </div>
                 </div>
-                <div className="input-field">
-                  <input
-                    placeholder="Password"
-                    className="validate"
-                    type="password"
-                    // onChange={(e) => setPassword(e.target.value)}
-                    // value={password}
-                    {...register("password", { required: true })}
-                  />
+
+                <div className='mb-2 input-field full-width' >
+                  <label htmlFor="name" >Organization Name</label><br />
+                  <input placeholder="Name of Organization" className="validate full-content" required type="text" id="name" name="name" autoComplete="name" enterKeyHint="next" {...register("name")} />
                 </div>
-                <div className="text-white" id="already">Already have an account?
-                  <Link to="/login" ><p className="underline">Login</p></Link>
-                </div>
-                <div className='mb-2'>
-                  <label htmlFor="name">Name Of Organization:</label><br />
-                  <input required type="text" id="name" name="name" autoComplete="name" enterKeyHint="next" {...register("name")} />
-                </div>
-                <div className='mb-2'>
-                  <label htmlFor="street-address">Street address:</label><br />
-                  <input type="text" id="street-address" name="street-address" autoComplete="street-address" required enterKeyHint="next" {...register("address")}></input>
+                <div className='mb-2 input-field full-width'>
+                  <label htmlFor="street-address">Street address</label><br />
+                  <input placeholder="Street address" className="validate full-content" type="text" id="street-address" name="street-address" autoComplete="street-address" required enterKeyHint="next" {...register("address")}></input>
 
                 </div>
-                <div className='mb-2'>
-                  <label htmlFor="postal-code">ZIP or postal code (optional):</label><br />
-                  <input className="postal-code" id="postal-code" name="postal-code" autoComplete="postal-code" enterKeyHint="next" {...register("pinCode")} />
+                <div className="flex">
+
+                  <div className='mb-2 input-field'>
+                    <label htmlFor="city">city</label><br />
+                    <input placeholder="City" className="validate" required type="text" id="city" name="city" autoComplete="address-level2" enterKeyHint="next" {...register("city")} />
+                  </div>
+                  <div className='mb-2 input-field'>
+                    <label htmlFor="postal-code">ZIP code </label><br />
+                    <input placeholder="ZIP or postal code" required className="postal-code validate" id="postal-code" name="postal-code" autoComplete="postal-code" enterKeyHint="next" {...register("pinCode")} />
+                  </div>
                 </div>
-                <div className='mb-2'>
-                  <label htmlFor="city">City:</label><br />
-                  <input required type="text" id="city" name="city" autoComplete="address-level2" enterKeyHint="next" {...register("city")} />
-                </div>
-                <button className="btn btn-g" type="submit">
-                  Sign Up
-                </button>
+                <center>
+                  <button className="btn btn-g" type="submit">
+                    Sign Up
+                  </button>
+
+                </center>
+
+                <center>
+
+                  <div className="text-white" id="already">Already have an account?
+                    <Link to="/login" ><p className="underline">Login</p></Link>
+                  </div>
+                </center>
               </form>
             </div>
           </div>

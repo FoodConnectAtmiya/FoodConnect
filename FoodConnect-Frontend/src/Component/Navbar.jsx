@@ -5,36 +5,39 @@ function Navbar() {
   return (
     <div>
         <nav>
-          <a className="flx">
+          <Link to="/" className="flx">
             <i>
               <img src={logo} height="70px" alt="" />
             </i>
-          </a>
+          </Link>
           <div className="links" id="nav-links">
             <i className="fa fa-times"></i>
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <Link to="/home">Home</Link>
               </li>
               <li>
-                <a href="#about">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="#service">Services</a>
+                <Link to="/service">Services</Link>
               </li>
               <li>
-                <a href="#post">Facilities</a>
+                <Link to="/post">Facilities</Link>
               </li>
               <li>
-                <a href="#review">Reviews</a>
+                <Link to="/review">Reviews</Link>
               </li>
               <li>
-                <a href="#contact">Contact Us</a>
+                <Link to="/contact">Contact Us</Link>
               </li>
               <li>
-                <Link to="/signup">
+                {/* {(!localStorage.getItem("loggedInDonor") || !localStorage.getItem("loggedInOrganization")) && <Link to="/signup">
                   <span className="btn">Sign-Up</span>
-                </Link>
+                </Link>} */}
+                {(!localStorage.getItem("loggedInDonor") && !localStorage.getItem("loggedInOrganization")) && <Link to="/signup">
+                  <span className="btn">Sign-Up</span>
+                </Link>}
               </li>
             </ul>
           </div>
